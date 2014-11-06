@@ -4,8 +4,9 @@ Angular Tips and Tricks
 Routing
 -------
 
-* Use the Angular UI router over Angular's build in router.  It provides child views, routing by state, and much more.
+* Use the Angular UI Router over Angular's build in router.  It provides child views, routing by state, and much more.
 * Use the `resolve` property to resolve dependencies before control is handed to a controller and the page displays.  This will reduce flickering during page transitions when retrieving data via REST calls needed for the view.  Here is a very good [tutorial and example](http://blog.brunoscopelliti.com/show-route-only-after-all-promises-are-resolved)
+* The current state is `$state.current.name`.
     
 REST calls
 ----------
@@ -17,21 +18,27 @@ Promises
 --------
 
 * Use promises (`$q`) instead of callbacks. It will make your code look more elegant and clean, and save you from callback hell.
-* Learn to use `$q.when`.  very cool way to wrap a return inside a promise!  http://stackoverflow.com/questions/16770821/how-does-angular-q-when-work
-* Here's a great [video](https://www.youtube.com/watch?v=33kl0iQByME&list=PLhc_bKwZngxW_ZlY0NkaGkvKpiA_pzcZ-&index=12) from Dave Smith on promises.
+* Get familiar with [`$q.when`](http://stackoverflow.com/questions/16770821/how-does-angular-q-when-work).  It can save a lot of code.  
+* Here's a great [video from Dave Smith](https://www.youtube.com/watch?v=33kl0iQByME&list=PLhc_bKwZngxW_ZlY0NkaGkvKpiA_pzcZ-&index=12) on promises.
 
 
 Controllers and $scope
 ----------------------
 
 * Use the [Controller as](http://www.thinkster.io/pick/GmI3KetKo6/angularjs-experimental-controller-as-syntax) syntax and as the first line of your controller add the line `var model = this`.  This will place the controller object into $scope which you can use as your View Model.
-* On the occations you need to add properties and functions to $scope, as a general rule of thumb, you should avoid direct bindings to the $scope's properties, but instead bind to an object bound the $scope.  Per Google, this also reduces the risk around prototypal inheritance masking primitives.  Here is an excellent [video](https://egghead.io/lessons/angularjs-experimental-controller-as-syntax) which explains this concept.
+* On the occasions you need to add properties and functions to $scope, as a general rule of thumb, you should avoid direct bindings to the $scope's properties, but instead bind to an object bound the $scope.  Per Google, this also reduces the risk around prototypal inheritance masking primitives.  Here is an excellent [video](https://egghead.io/lessons/angularjs-experimental-controller-as-syntax) which explains this concept.
 * Rather than `ngInit` to initialize values on a scope, initialize the values in the controller.  The only appropriate use of `ngInit` is for aliasing special properties of `ngRepeat`.
+
+Events
+------
+
+* Broadcast and Emit are expensive so use them judiciously.
+
 
 Templates
 ---------
 
-* When you are conditionaly hiding/showing form field use `ng-if` instead of `ng-show`. Because `ng-if` actually adds/removed the element from the DOM, the any validation on hidden fields will not fire.  `ng-show`, on the other hand, only hide DOM with css and therefore validations within `ng-show` will be fired.  The primary validation which will be affected is the required validation.  If you use a required validation inside a `ng-show`, use the `ng-required` attribute with the same condition as being used by the `ng-show` and that will solve the issue also.
+* When you are conditionaly hiding/showing form field use `ng-if` instead of `ng-show`. Because `ng-if` actually adds/removed the element from the DOM, the any validation on hidden fields will not fire.  `ng-show`, on the other hand, only hide DOM with css and therefore validations within `ng-show` will be fired.  The primary validation which will be affected is the `required` validation.  If you use a `required` validation inside a `ng-show`, use the `ng-required` attribute with the same condition as being used by the `ng-show` and that will solve the issue also.
 
 Minification
 ------------
@@ -64,7 +71,7 @@ Forms
 Skip jQuery
 -----------
 
-* Angular apps do not depend on JQuery.  Directives and other Angular features should resolve all of your needs. 
-* The only real valid reason to include jQuery is when you need to use a jQuery plug-in.  In these cases you will need to include jQuery and you can wrap the plug-in inside a directive with the help of something like the [Angular UI jQuery Passthough directive](http://angular-ui.github.io/ui-utils/#/jq).  I know people which have had great success using this directive.
+* Angular apps do not depend on jQuery.  Directives and other Angular features should solve all of your needs. 
+* The only real valid reason to include jQuery to use a jQuery plug-in which does not have an equivilent Angular directive.  In these cases, you will need to include jQuery and optionally wrap the plug-in inside a directive with the help of something like the [Angular UI jQuery Passthough directive](http://angular-ui.github.io/ui-utils/#/jq).  I know developers whom have had great success using this method.
 
 
