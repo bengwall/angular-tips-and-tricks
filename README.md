@@ -38,7 +38,28 @@ Events
 Templates
 ---------
 
-* When you are conditionaly hiding/showing form field use `ng-if` instead of `ng-show`. Because `ng-if` actually adds/removed the element from the DOM, the any validation on hidden fields will not fire.  `ng-show`, on the other hand, only hide DOM with css and therefore validations within `ng-show` will be fired.  The primary validation which will be affected is the `required` validation.  If you use a `required` validation inside a `ng-show`, use the `ng-required` attribute with the same condition as being used by the `ng-show` and that will solve the issue also.
+  - * **`ng-if` vs `ng-show`**: When you are conditionaly hiding/showing form field use `ng-if` instead of `ng-show`. Because `ng-if` actually adds/removed the element from the DOM, the any validation on hidden fields will not fire.  `ng-show`, on the other hand, only hide DOM with css and therefore validations within `ng-show` will be fired.  The primary validation which will be affected is the `required` validation.  If you use a `required` validation inside a `ng-show`, use the `ng-required` attribute with the same condition as being used by the `ng-show` and that will solve the issue also.
+
+  - **One-time binding syntax**: In Angular 1.3, use the one-time binding syntax `{{ ::value }}` where it makes sense
+
+    ```html
+    // avoid
+    <h1>{{ vm.title }}</h1>
+
+    // recommended
+    <h1>{{ ::vm.title }}</h1>
+    ```
+    
+    *Why?* : Binding once removes the watcher from the scope's `$$watchers` array after the `undefined` variable becomes resolved, thus improving performance in each dirty-check
+    
+  - **Consider $scope.$digest**: Use `$scope.$digest` over `$scope.$apply` where it makes sense. Only child scopes will update
+
+    ```javascript
+    $scope.$digest();
+    ```
+    
+    *Why?* : `$scope.$apply` will call `$rootScope.$digest`, which causes the entire application `$$watchers` to dirty-check again. Using `$scope.$digest` will dirty check current and child scopes from the initiated `$scope`
+
 
 Minification
 ------------
