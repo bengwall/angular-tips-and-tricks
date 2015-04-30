@@ -18,7 +18,7 @@ Promises
 --------
 
 * Use promises (`$q`) instead of callbacks. It will make your code look more elegant and clean, and save you from callback hell.
-* Get familiar with [`$q.when`](http://stackoverflow.com/questions/16770821/how-does-angular-q-when-work).  It can save a lot of code.  
+* Get familiar with [`$q.when()`](http://stackoverflow.com/questions/16770821/how-does-angular-q-when-work) and $q.reject().  It can save a lot of code.  
 * Here's a great [video from Dave Smith](https://www.youtube.com/watch?v=33kl0iQByME&list=PLhc_bKwZngxW_ZlY0NkaGkvKpiA_pzcZ-&index=12) on promises.
 
 
@@ -95,4 +95,15 @@ Skip jQuery
 * Angular apps do not depend on jQuery.  Directives and other Angular features should solve all of your needs. 
 * The only real valid reason to include jQuery to use a jQuery plug-in which does not have an equivilent Angular directive.  In these cases, you will need to include jQuery and optionally wrap the plug-in inside a directive with the help of something like the [Angular UI jQuery Passthough directive](http://angular-ui.github.io/ui-utils/#/jq).  I know developers whom have had great success using this method.
 
+Helpful Libraries and Directives
+--------------------------------
+
+* Use restful-ng-mock for mocking.  It is a wraps Angulars ngMock and it a lot easier to use.
+* Look at the AngularUI Bootstrap directives.  Make sure you install using `bower install angular-bootstrap` instead of `bower install angular-ui-bootstrap`
+* Consider using Restangular which wraps and abstracts $http.
+
+Misc Tips
+---------
+
+* Learn EM6 and TypeScript as soon as possible.  You can down convert to EM5.  This will prepare you for Angular 2.0.
 
